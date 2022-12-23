@@ -571,17 +571,16 @@ public class FNAmpItems {
             "&d&oFN Material Generators Upgrades"
     );
 
-    // FIXME
     public static final SlimefunItemStack FN_MAT_GEN_UPGRADES_FAST_PRODUCE = new SlimefunItemStack(
             "FN_MAT_GEN_UPGRADES_FAST_PRODUCE",
             Material.YELLOW_DYE,
-            "&fFN Mat Gen Fast Produce",
-            "&6Faster production",
+            "&fFN 材料生成器高速生产模块",
+            "&6提升生产速度",
             "",
-            "&e+1.75x Mat gen speed for 30 minutes",
+            "&e在 30 分钟内 提升 +1.75x 生产速度",
             "",
-            "&aRight click on a material generator",
-            "&d&oFN Material Generators Upgrades"
+            "&a右键一个材料生成器以使用",
+            "&d&oFN 材料生成器升级模块"
     );
 
     public static final SlimefunItemStack FN_FAL_GENERATOR_TIER1 = new SlimefunItemStack(
