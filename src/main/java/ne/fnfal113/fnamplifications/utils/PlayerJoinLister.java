@@ -26,7 +26,8 @@ public class PlayerJoinLister implements Listener {
             return;
         }
 
-        if(players.contains(player.getUniqueId())){ // only send once when player joins fresh after server restart
+        // only send once when player joins fresh after server restart
+        if(players.contains(player.getUniqueId())){
            return;
         }
 
@@ -45,22 +46,13 @@ public class PlayerJoinLister implements Listener {
                 Utils.colorTranslator("&e&lFN &c&lAmpli&b&lfications &r&e" + FNAmplifications.getInstance().getDescription().getVersion()),
                 Utils.colorTranslator("&fChangelog"),
                 "",
-                Utils.colorTranslator("&b&l• &r&b&lBug fixes and new items!"),
-                Utils.colorTranslator("  &d- Added FN Throwable Torch"),
-                Utils.colorTranslator("    &eRight click to throw this torch to a target"),
-                Utils.colorTranslator("    &elocation and it will be placed if got hit"),
-                Utils.colorTranslator("  &d- Added Berserk Gem"),
-                Utils.colorTranslator("    &eGain attack damage when your health is below"),
-                Utils.colorTranslator("    &e30%, higher tier gem higher base damage!"),
-                Utils.colorTranslator("  &d- Fixed Electric Jukebox bug relating to functionality"),
-                Utils.colorTranslator("    &dwhen there is not enough power supply"),
-                Utils.colorTranslator("  &d- Minor code base improvements (API)"),
+                Utils.colorTranslator("  &d- Fixed Hasty Gem not being upgradeable"),
                 Utils.colorTranslator(""),
+                Utils.colorTranslator("&fHappy Holidays Gamer! Hope you have a bright day ahead!"),
                 Utils.colorTranslator("&eChangelog notification can be disabled in config.yml"),
                 Utils.colorTranslator(""),
-                Utils.colorTranslator("&ehttps://fnfal113.tech/pluginStats"),
-                Utils.colorTranslator("&ehttps://fnfal113.tech/fnAmpItems"),
-                Utils.colorTranslator("&ehttps://github.com/FN-FAL113/"),
+                Utils.colorTranslator("&eYou may visit this website for the fn items wiki:"),
+                Utils.colorTranslator("&e&nhttps://fnfal113.tech/fnAmpItems"),
                 "||---------------------------------------------------||"
         );
     }

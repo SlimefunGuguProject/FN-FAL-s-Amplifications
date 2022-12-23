@@ -4,7 +4,7 @@
 
 更多玩法等待着玩家自己在尝试和制作中发现. 附属中物品的合成难度与 InfinityXpansion 和 LiteXpansion 相似, 不过你所付出的努力都是值得的!
 
-该附属支持 1.15.x - 1.19.x 版本
+该附属支持 1.16.x - 1.19.x 版本
 
 ## :bulb: 特性
 
@@ -24,49 +24,14 @@
 - **FN 唱片机** - 能够播放放入的唱片, 并且支持顺序播放的唱片机, 有 3 到 12 个槽位可供储存唱片, 不必手动换碟!
 - **FN 自动搭梯机** - 自动在上下最大8格高度的方块上放置梯子
 - **FN 闪耀珍珠** - 用这颗珍珠带着你骑着的实体一起传送!
-- **在未来还有更多!**
+- **FN 可投掷火把** - 右键丢出火把, 会自动在落地点放置火把
+- **未来还会添加更多新东西!**
 
 ## :arrow_down: 下载
 
 ### [从构建站下载](https://builds.guizhanss.net/SlimefunGuguProject/FN-FAL-s-Amplifications/main/)
 
 ![构建状态](https://builds.guizhanss.net/f/SlimefunGuguProject/FN-FAL-s-Amplifications/main/badge.svg)
-
-## :blue_book: 插件在 Slimefun 指南中的样式
-
-![guide](image/main-category.png)
-
-#### :battery: 能源扩展
-
-![Power X Category](image/powerxpansion.png)
-
-#### :white_square_button: 材料生成器
-
-![Material Gen Category](image/material-generator.png)
-
-#### :high_brightness: 太阳能发电机
-
-![Solar Gen Category](image/solar-generator.png)
-
-#### :factory: 机器与物品
-
-![Machinery Category](image/machine.png)![Machinery Items Category](image/machine-component.png)
-
-#### :sparkler: 魔棍
-
-![MysterySticks](image/sticks.png)
-
-#### :tshirt: 装备
-
-![Gears](image/gears.png)
-
-#### :oden: 法杖
-
-![Staffs](image/staffs.png)
-
-#### :gift: 杂项
-
-![misc](image/misc.png)
 
 ### :computer: 几乎全部都是可配置的
 
@@ -79,15 +44,6 @@
 ### :running: 反馈
 
 注意: 在非官方汉化版中遇到问题时, 请在交流群反馈
-
-<p>
-  <a href="https://discord.gg/slimefun">
-    <img src="https://discordapp.com/api/guilds/565557184348422174/widget.png?style=banner3" alt="Discord Invite"/>
-  </a>
-  <a href="https://discord.gg/SqD3gg5SAU">
-    <img src="https://discordapp.com/api/guilds/809178621424041997/widget.png?style=banner3" alt="Discord Invite"/>
-  </a>
-</p>
 
 ### 特别鸣谢
 

@@ -71,6 +71,12 @@ public class FNAmpItems {
             new CustomItemStack(Material.EMERALD_BLOCK,
                     "&eFN 材料生成器"));
 
+    public static final SubItemGroup MATERIAL_GENERATORS_UPGRADES = new SubItemGroup(
+            new NamespacedKey(FNAmplifications.getInstance(), "MATERIAL_GENERATORS_UPGRADES"),
+            FN_MAIN_GROUP,
+            new CustomItemStack(Material.GOLD_BLOCK,
+                    "&eFN 材料生成器升级模块"));
+
     public static final SubItemGroup SOLAR_GENERATORS = new SubItemGroup(
             new NamespacedKey(FNAmplifications.getInstance(), "SOLAR_GENERATORS"),
             FN_MAIN_GROUP,
@@ -553,6 +559,31 @@ public class FNAmpItems {
         }
     }
 
+    public static final SlimefunItemStack FN_MAT_GEN_UPGRADES_REPAIR_ITEM = new SlimefunItemStack(
+            "FN_MAT_GEN_UPGRADES_REPAIR_ITEM",
+            Material.BLACK_DYE,
+            "&fFN Mat Gen Repair Item",
+            "&6Repairs or add durability",
+            "",
+            "&e+20 durability",
+            "",
+            "&aRight click on a material generator",
+            "&d&oFN Material Generators Upgrades"
+    );
+
+    // FIXME
+    public static final SlimefunItemStack FN_MAT_GEN_UPGRADES_FAST_PRODUCE = new SlimefunItemStack(
+            "FN_MAT_GEN_UPGRADES_FAST_PRODUCE",
+            Material.YELLOW_DYE,
+            "&fFN Mat Gen Fast Produce",
+            "&6Faster production",
+            "",
+            "&e+1.75x Mat gen speed for 30 minutes",
+            "",
+            "&aRight click on a material generator",
+            "&d&oFN Material Generators Upgrades"
+    );
+
     public static final SlimefunItemStack FN_FAL_GENERATOR_TIER1 = new SlimefunItemStack(
             "FN_FAL_GENERATOR_TIER1",
             "6d2822cedb3abd579d6dfa2966c1433c3c36cb9732e2c23ec0cc81daedd4403b",
@@ -946,7 +977,7 @@ public class FNAmpItems {
             "FN_MAGICAL_ITEMS_SPIRAL_FIRE_RUNE",
             PlayerHead.getItemStack(PlayerSkin.fromHashCode("8301aa86cafd4b2d732a9b4894cfcfc65edc828e8571b45dbf0a3ba96575cccf")),
             "&c螺旋火焰符文",
-            "&f炽热之心正从符文中螺旋而升",
+            "&f炽热之心正从符文中螺旋升起",
             "",
             "&d&oFN 魔法物品");
 
@@ -1215,6 +1246,12 @@ public class FNAmpItems {
             "FN_GEM_UPGRADER",
             Material.SMITHING_TABLE,
             "&dFN 宝石升级器"
+    );
+
+    public static final SlimefunItemStack FN_GEM_DOWNGRADER = new SlimefunItemStack(
+            "FN_GEM_DOWNGRADER",
+            Material.STONECUTTER,
+            "&dFN 宝石降级器"
     );
 
     public static final SlimefunItemStack FN_MAGIC_ALTAR = new SlimefunItemStack(
@@ -1750,8 +1787,8 @@ public class FNAmpItems {
             "",
             "&e让你丢出的武器在击中后",
             "&e能够自行返回玩家手中",
-            "&e绑定武器前",
-            "&e必须绑定有以下任意一种宝石:",
+            "&e这个宝石需要以下几种",
+            "&e可投掷武器宝石:",
             "&e- 诅咒宝石",
             "&e- 三相之剑宝石",
             "&e- 飞斧宝石",
@@ -2289,6 +2326,15 @@ public class FNAmpItems {
             "&d以及 FN 宝石升级器中所需的合成配方"
     );
 
+    public static final SlimefunItemStack FN_GEM_DOWNGRADES_DISPLAY_ITEM = new SlimefunItemStack(
+            "FN_GEM_DOWNGRADE_DISPLAY_ITEM",
+            PlayerHead.getItemStack(PlayerSkin.fromHashCode("36161daa3589ec9c8187459ac36fd4dd2646c040678d3bfacb72a2210c6c801c")),
+            "&b宝石降级",
+            "",
+            "&单击此处了解如何降级宝石",
+            "&d以及在 FN 宝石降级器的合成配方"
+    );
+
     public static final SlimefunItemStack FN_GEM_FINE_JASPER_CRAFTING = new SlimefunItemStack(
             "FN_GEM_FINE_JASPER_CRAFTING",
             PlayerHead.getItemStack(PlayerSkin.fromHashCode("aac15f6fcf2ce963ef4ca71f1a8685adb97eb769e1d11194cbbd2e964a88978c")),
@@ -2331,12 +2377,12 @@ public class FNAmpItems {
     public static final SlimefunItemStack FN_THROWABLE_TORCH = new SlimefunItemStack(
             "FN_THROWABLE_TORCH",
             Material.TORCH,
-            "&cFN's Throwable Torch",
+            "&cFN 可投掷火把",
             "",
-            "&dRight click to throw in the target",
-            "&ddirection and it will be placed if",
-            "&da block got hit. Entities who got hit",
-            "&dwill be set on fire for 4 seconds"
+            "&d右键扔出火把",
+            "&d扔出的火把会在落地处",
+            "&d自动放置. 如果砸到了生物身上,",
+            "&d会对其造成 4 秒的燃烧伤害"
     );
 
     public static final SlimefunItemStack FN_JUKEBOX_I = new SlimefunItemStack(
