@@ -69,18 +69,18 @@ public class CustomPowerGen extends SlimefunItem implements HologramOwner, Energ
     public void setLore(ItemStack itemStack){
         ItemMeta meta = itemStack.getItemMeta();
         List<String> lore = meta.getLore();
-        lore.add(Utils.colorTranslator(LoreBuilderDynamic.powerBuffer(FNAmplifications.getInstance().getConfigManager().getIntValueById(this.getId(), "storage"))));
-        lore.add(Utils.colorTranslator(LoreBuilderDynamic.powerPerTick(FNAmplifications.getInstance().getConfigManager().getIntValueById(this.getId(), "dayrate")) + " (白天)"));
-        lore.add(Utils.colorTranslator(LoreBuilderDynamic.powerPerTick(FNAmplifications.getInstance().getConfigManager().getIntValueById(this.getId(), "nightrate")) + " (夜晚)"));
+        lore.add(Utils.colorTranslator(LoreBuilderDynamic.powerBuffer(FNAmplifications.getInstance().getConfigManager().getCustomConfig("power-xpansion-settings").getInt(this.getId() + "." + "storage"))));
+        lore.add(Utils.colorTranslator(LoreBuilderDynamic.powerPerTick(FNAmplifications.getInstance().getConfigManager().getCustomConfig("power-xpansion-settings").getInt(this.getId() + "." + "dayrate")) + " (白天)"));
+        lore.add(Utils.colorTranslator(LoreBuilderDynamic.powerPerTick(FNAmplifications.getInstance().getConfigManager().getCustomConfig("power-xpansion-settings").getInt(this.getId() + "." + "nightrate")) + " (夜晚)"));
         meta.setLore(lore);
         itemStack.setItemMeta(meta);
     }
 
     public void setConfigValues(int dayRate, int nightRate, int output, int storage) throws IOException {
-        FNAmplifications.getInstance().getConfigManager().setConfigIntegerValues(this.getId(), "dayrate", dayRate, "power-xpansion-settings", true);
-        FNAmplifications.getInstance().getConfigManager().setConfigIntegerValues(this.getId(), "nightrate", nightRate, "power-xpansion-settings", true);
-        FNAmplifications.getInstance().getConfigManager().setConfigIntegerValues(this.getId(), "output", output, "power-xpansion-settings", true);
-        FNAmplifications.getInstance().getConfigManager().setConfigIntegerValues(this.getId(), "storage", storage, "power-xpansion-settings", true);
+        FNAmplifications.getInstance().getConfigManager().initializeConfig(this.getId(), "dayrate", dayRate, "power-xpansion-settings");
+        FNAmplifications.getInstance().getConfigManager().initializeConfig(this.getId(), "nightrate", nightRate, "power-xpansion-settings");
+        FNAmplifications.getInstance().getConfigManager().initializeConfig(this.getId(), "output", output, "power-xpansion-settings");
+        FNAmplifications.getInstance().getConfigManager().initializeConfig(this.getId(), "storage", storage, "power-xpansion-settings");
     }
 
     @Nonnull
@@ -119,6 +119,7 @@ public class CustomPowerGen extends SlimefunItem implements HologramOwner, Energ
     public int getGeneratedOutput(@Nonnull Location l, @Nonnull Config data) {
         final int stored = getCharge(l);
 
+        // for first server boot up, cache location and hologram status per generator
         if(!HOLO_CACHE.containsKey(l)){
             if(BlockStorage.getLocationInfo(l, "holo_status") != null){
                 HOLO_CACHE.put(l, Boolean.parseBoolean(BlockStorage.getLocationInfo(l, "holo_status")));
@@ -126,7 +127,6 @@ public class CustomPowerGen extends SlimefunItem implements HologramOwner, Energ
                 BlockStorage.addBlockInfo(l, "holo_status", "true");
                 HOLO_CACHE.put(l, true);
             }
-
         } else {
             if(HOLO_CACHE.get(l)) {
                 String charge = getCharge(l) <= 0 ? Utils.colorTranslator("&8" + getCharge(l)) : Utils.colorTranslator("&a" + getCharge(l));
@@ -166,15 +166,15 @@ public class CustomPowerGen extends SlimefunItem implements HologramOwner, Energ
 
     @Override
     public int getCapacity() {
-        return FNAmplifications.getInstance().getConfigManager().getIntValueById(this.getId(), "storage");
+        return FNAmplifications.getInstance().getConfigManager().getCustomConfig("power-xpansion-settings").getInt(this.getId() + "." + "storage");
     }
 
     public int getDayRate(){
-        return FNAmplifications.getInstance().getConfigManager().getIntValueById(this.getId(), "dayrate");
+        return FNAmplifications.getInstance().getConfigManager().getCustomConfig("power-xpansion-settings").getInt(this.getId() + "." + "dayrate");
     }
 
     public int getNightRate(){
-        return FNAmplifications.getInstance().getConfigManager().getIntValueById(this.getId(), "nightrate");
+        return FNAmplifications.getInstance().getConfigManager().getCustomConfig("power-xpansion-settings").getInt(this.getId() + "." + "nightrate");
     }
 
 }

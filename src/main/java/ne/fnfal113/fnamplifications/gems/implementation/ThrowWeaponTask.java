@@ -76,13 +76,13 @@ public class ThrowWeaponTask extends BukkitRunnable {
             getPlayer().playSound(getPlayer().getLocation(), Sound.ENTITY_WITCH_THROW, 1.0F, 1.0F);
 
             // sets armor stand arm item and body angle
-            if(isTriWeapon()) {
+            if(isTriWeapon()) { // tri-weapon variant
                 armorStand.setRightArmPose(Utils.setRightArmAngle(armorStand, 0, 0, 0));
 
                 Objects.requireNonNull(armorStand.getEquipment()).setItemInMainHand(itemStack.clone());
                 Objects.requireNonNull(armorStand.getEquipment()).setItemInOffHand(itemStack.clone());
                 Objects.requireNonNull(armorStand.getEquipment()).setHelmet(itemStack.clone());
-            } else{
+            } else { // not a tri-weapon variant
                 armorStand.setRightArmPose(Utils.setRightArmAngle(armorStand, 270, 0, 0));
 
                 Objects.requireNonNull(armorStand.getEquipment()).setItemInMainHand(itemStack.clone());
@@ -140,7 +140,7 @@ public class ThrowWeaponTask extends BukkitRunnable {
             }
         }
 
-        // drop the weapon if the distance is greater 60 blocks
+        // drop the weapon if the distance is greater square-root of 3600 or 60 blocks
         if(getArmorStand().getLocation().distanceSquared(getPlayer().getLocation()) > 3600){
             getPlayer().sendMessage(Utils.colorTranslator("&e你的武器已达到 60 格方块的最大距离!"));
 

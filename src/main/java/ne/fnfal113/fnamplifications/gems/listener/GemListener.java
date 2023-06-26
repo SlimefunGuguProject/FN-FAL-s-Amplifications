@@ -3,7 +3,6 @@ package ne.fnfal113.fnamplifications.gems.listener;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.protection.Interaction;
-import ne.fnfal113.fnamplifications.FNAmplifications;
 import ne.fnfal113.fnamplifications.gems.abstracts.AbstractGem;
 import ne.fnfal113.fnamplifications.gems.events.GuardianSpawnEvent;
 import ne.fnfal113.fnamplifications.gems.handlers.*;
@@ -62,17 +61,16 @@ public class GemListener implements Listener {
                     SlimefunItem item = getSfItem(key, pdc);
 
                     if(item instanceof AbstractGem) {
-                        // consumer requires an instance of the class that
-                        // extends a sub-interface of the gem handler interface
+                        // consumer requires an instance of the implementing class (gem implements given clazz param)
                         AbstractGem gem = (AbstractGem) item;
 
                         if(clazz.isInstance(gem)) {
-                            if(gem.isEnabledInCurrentWorld(gem.getId(), p.getWorld().getName())) {
+                            if(gem.isEnabledInCurrentWorld(p.getWorld().getName())) {
                                 consumer.accept(clazz.cast(gem));
                             } else {
                                 p.sendMessage(Utils.colorTranslator(gem.getItemName() + "&6 在你当前的世界被禁用了!"));
                             }
-                        } // is gem instance of sub interface of GemHandler
+                        } // is gem an instance of the given interface class
                     } // is gem instance of AbstractGem
                 }
             }
@@ -128,10 +126,10 @@ public class GemListener implements Listener {
         }
 
         Optional<SlimefunItem> slimefunGemItem = Optional.ofNullable(SlimefunItem.getByItem(gemItem.get()));
-        Optional<ItemStack> currentItem = Optional.ofNullable(event.getCurrentItem());
+        Optional<ItemStack> itemStackToSocket = Optional.ofNullable(event.getCurrentItem());
 
-        if(currentItem.isPresent() && slimefunGemItem.isPresent() && slimefunGemItem.get() instanceof AbstractGem) {
-            ((AbstractGem) slimefunGemItem.get()).onDrag(player, slimefunGemItem.get(), gemItem.get(), currentItem.get());
+        if(itemStackToSocket.isPresent() && slimefunGemItem.isPresent() && slimefunGemItem.get() instanceof AbstractGem) {
+            ((AbstractGem) slimefunGemItem.get()).onDrag(player, slimefunGemItem.get(), gemItem.get(), itemStackToSocket.get());
 
             event.setCancelled(true);
         }
@@ -312,7 +310,6 @@ public class GemListener implements Listener {
     public void entityBlockChange(EntityChangeBlockEvent event){
         if (event.getEntity().getType() == EntityType.FALLING_BLOCK && event.getEntity().hasMetadata("shockwave_gem")) {
             event.setCancelled(true);
-            event.getEntity().removeMetadata("shockwave_gem", FNAmplifications.getInstance());
             event.getEntity().remove();
         }
     }

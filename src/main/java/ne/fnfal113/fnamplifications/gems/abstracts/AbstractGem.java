@@ -40,13 +40,14 @@ public abstract class AbstractGem extends SlimefunItem {
 
     @SneakyThrows
     public void initializeSettings(int defaultChance){
-        if(defaultChance != 0) {
+        // only gem with default chance above 0 but must also implement gem upgrade interface
+        if(defaultChance != 0) { 
             setConfigChanceValues(defaultChance);
             setConfigWorldSettings();
 
-            Utils.upgradeGemLore(this.getItem(), this.getItem().getItemMeta(), this.getId(),
-                    "chance", "%", "&e", "%", 4);
-            this.chance = FNAmplifications.getInstance().getConfigManager().getIntValueById(this.getId(), "chance");
+            Utils.setGemTierLore(this.getItem(), this.getId(),
+                    "chance", "%", "&e", "%", 4, "gem-settings");
+            this.chance = FNAmplifications.getInstance().getConfigManager().getCustomConfig("gem-settings").getInt(this.getId() + "." + "chance");
         } else {
             setConfigWorldSettings();
         }
@@ -57,7 +58,7 @@ public abstract class AbstractGem extends SlimefunItem {
      * @param chance the chance to set in the config file
      */
     public void setConfigChanceValues(int chance) throws IOException {
-        FNAmplifications.getInstance().getConfigManager().setConfigIntegerValues(this.getId(), "chance", chance, "gem-settings", true);
+        FNAmplifications.getInstance().getConfigManager().initializeConfig(this.getId(), "chance", chance, "gem-settings");
     }
 
     /**
@@ -65,18 +66,17 @@ public abstract class AbstractGem extends SlimefunItem {
      */
     public void setConfigWorldSettings() throws IOException {
         for (World world: Bukkit.getWorlds()) {
-            FNAmplifications.getInstance().getConfigManager().setConfigBooleanValues(this.getId() + "." + "world-settings", world.getName() + "_enable", true, "gem-settings", true);
+            FNAmplifications.getInstance().getConfigManager().initializeConfig(this.getId() + "." + "world-settings", world.getName() + "_enable", true, "gem-settings");
         }
     }
 
     /**
      *
      * @param worldName the name of the world the player currently resides
-     * @param gemID the slimefun gem identifier
      * @return true if gem is enabled in the current world
      */
-    public boolean isEnabledInCurrentWorld(String gemID, String worldName){
-        return FNAmplifications.getInstance().getConfigManager().getBoolById(gemID + "." + "world-settings", worldName + "_enable");
+    public boolean isEnabledInCurrentWorld(String worldName){
+        return FNAmplifications.getInstance().getConfigManager().getCustomConfig("gem-settings").getBoolean(this.getId() + "." + "world-settings" + "." + worldName + "_enable");
     }
 
     /**
@@ -98,8 +98,8 @@ public abstract class AbstractGem extends SlimefunItem {
                 Bukkit.getOfflinePlayer(player.getUniqueId()), player.getLocation(), Interaction.INTERACT_BLOCK);
     }
 
-    public void bindGem(SlimefunItem gem, ItemStack currentItem, Player player, boolean retaliate){
-        new Gem(gem, currentItem, player).onDrag(retaliate);
+    public void bindGem(SlimefunItem slimefunGemItem, ItemStack itemStackToSocket, Player player){
+        new Gem(slimefunGemItem, itemStackToSocket, player).startSocket();
     }
 
     /**
@@ -107,8 +107,8 @@ public abstract class AbstractGem extends SlimefunItem {
      * @param player the player who dragged and dropped the gem
      * @param slimefunItem the slimefun gem in the inventory that is attached to the cursor
      * @param gemItem the itemstack gem in the inventory that is attached to the cursor
-     * @param currentItem the current item in the inventory that the gem was dragged and dropped to
+     * @param itemStackToSocket the itemstack to socket the gem
      */
-    public abstract void onDrag(Player player, SlimefunItem slimefunItem, ItemStack gemItem, ItemStack currentItem);
+    public abstract void onDrag(Player player, SlimefunItem slimefunGemItem, ItemStack gemItem, ItemStack itemStackToSocket);
 
 }
