@@ -3,12 +3,12 @@ package ne.fnfal113.fnamplifications;
 import javax.annotation.Nonnull;
 
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
-import io.github.thebusybiscuit.slimefun4.libraries.dough.updater.GitHubBuildsUpdater;
 import ne.fnfal113.fnamplifications.config.ConfigManager;
 import ne.fnfal113.fnamplifications.gears.commands.GearCommands;
 import ne.fnfal113.fnamplifications.gears.runnables.ArmorEquipRunnable;
 import ne.fnfal113.fnamplifications.integrations.VaultIntegration;
 import ne.fnfal113.fnamplifications.test.ShockwaveTest;
+import net.guizhanss.guizhanlibplugin.updater.GuizhanUpdater;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -28,6 +28,13 @@ public final class FNAmplifications extends JavaPlugin implements SlimefunAddon 
     @Override
     public void onEnable() {
         setInstance(this);
+
+        if (!getServer().getPluginManager().isPluginEnabled("GuizhanLibPlugin")) {
+            getLogger().log(Level.SEVERE, "本插件需要 鬼斩前置库插件(GuizhanLibPlugin) 才能运行!");
+            getLogger().log(Level.SEVERE, "从此处下载: https://50l.cc/gzlib");
+            getServer().getPluginManager().disablePlugin(this);
+            return;
+        }
 
         new Metrics(this, 13219);
 
@@ -49,7 +56,7 @@ public final class FNAmplifications extends JavaPlugin implements SlimefunAddon 
         getServer().getScheduler().runTaskTimerAsynchronously(this, new ArmorEquipRunnable(), 0L, getConfig().getInt("armor-update-period") * 20L);
 
         if (getConfig().getBoolean("auto-update", true) && getDescription().getVersion().startsWith("Build")) {
-            new GuizhanBuildsUpdater(this, getFile(), "SlimefunGuguProject", "FN-FAL-s-Amplifications", "main", false, "zh-CN").start();
+            GuizhanUpdater.start(this, getFile(), "SlimefunGuguProject", "FN-FAL-s-Amplifications", "main");
         }
     }
 
